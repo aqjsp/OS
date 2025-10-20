@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="850" height="1300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="kernelGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="stackGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="heapGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1abc9c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16a085;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="mmapGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#9b59b6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8e44ad;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bssGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f39c12;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e67e22;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dataGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2ecc71;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#27ae60;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e91e63;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ad1457;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 箭头标记 -->
+    <marker id="arrowDown" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M2,2 L8,5 L2,8 Z" fill="#2c3e50"/>
+    </marker>
+    <marker id="arrowUp" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M8,2 L2,5 L8,8 Z" fill="#2c3e50"/>
+    </marker>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="850" height="1300" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+  
+  <!-- 标题 -->
+  <text x="425" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2c3e50">
+    Linux进程虚拟地址空间布局 (32位系统)
+  </text>
+  <text x="425" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#7f8c8d">
+    4GB虚拟地址空间 (0x00000000 - 0xFFFFFFFF)
+  </text>
+  
+  <!-- 地址标识 -->
+  <text x="50" y="110" font-family="monospace" font-size="14" font-weight="bold" fill="#34495e">0xFFFFFFFF</text>
+  <text x="170" y="110" font-family="Arial, sans-serif" font-size="12" fill="#7f8c8d">(4GB 高地址)</text>
+  
+  <text x="50" y="1270" font-family="monospace" font-size="14" font-weight="bold" fill="#34495e">0x00000000</text>
+  <text x="170" y="1270" font-family="Arial, sans-serif" font-size="12" fill="#7f8c8d">(0GB 低地址)</text>
+  
+  <!-- 内核空间 -->
+  <rect x="100" y="120" width="650" height="130" fill="url(#kernelGrad)" stroke="#c0392b" stroke-width="3" rx="8"/>
+  <text x="425" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">
+    内核空间 (Kernel Space)
+  </text>
+  <text x="425" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">
+    • 系统调用接口 • 中断处理程序 • 设备驱动程序
+  </text>
+  <text x="425" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">
+    • 进程调度器 • 内存管理器 • 内核数据结构
+  </text>
+  <text x="425" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ecf0f1">
+    只有内核态 (Ring 0) 才能访问 - 地址范围: 0xC0000000 ~ 0xFFFFFFFF (1GB)
+  </text>
+  
+  <!-- 内核/用户边界线 -->
+  <line x1="100" y1="270" x2="750" y2="270" stroke="#e74c3c" stroke-width="4" stroke-dasharray="10,5"/>
+  <text x="760" y="275" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#e74c3c">
+    内核/用户边界
+  </text>
+  
+  <!-- 用户空间标识 -->
+  <text x="50" y="300" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2980b9">
+    用户空间 (User Space) - 3GB
+  </text>
+  
+  <!-- 栈空间 -->
+  <rect x="100" y="310" width="650" height="130" fill="url(#stackGrad)" stroke="#2980b9" stroke-width="3" rx="8"/>
+  <text x="425" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">
+    栈 (Stack Segment)
+  </text>
+  <text x="425" y="365" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">
+    • 函数调用栈帧 • 局部变量 • 函数参数 • 返回地址
+  </text>
+  <text x="425" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">
+    地址范围: 0xBFFFFFFF ~ 动态边界 (向下增长 ↓)
+  </text>
+  <text x="425" y="405" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ecf0f1">
+    高地址→低地址增长，通过栈指针(ESP/RSP)管理
+  </text>
+  
+  <!-- 栈增长箭头 -->
+  <path d="M 425 450 L 425 480" stroke="#2c3e50" stroke-width="3" marker-end="url(#arrowDown)"/>
+  
+  <!-- 环境变量和命令行参数 -->
+  <rect x="100" y="460" width="650" height="60" fill="#95a5a6" stroke="#7f8c8d" stroke-width="2" rx="5"/>
+  <text x="425" y="485" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">
+    环境变量 &amp; 命令行参数
+  </text>
+  <text x="425" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="white">
+    argc, argv[], envp[] 数组 - 程序启动时由操作系统传递
+  </text>
+  
+  <!-- 空闲区域 -->
+  <rect x="100" y="540" width="650" height="80" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" stroke-dasharray="8,4" rx="5"/>
+  <text x="425" y="570" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#7f8c8d">
+    未分配区域 (空闲虚拟地址空间)
+  </text>
+  <text x="425" y="590" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#7f8c8d">
+    栈和堆之间的可用虚拟地址空间，按需分配物理内存
+  </text>
+  
+  <!-- 内存映射段 -->
+  <rect x="100" y="640" width="650" height="120" fill="url(#mmapGrad)" stroke="#8e44ad" stroke-width="3" rx="8"/>
+  <text x="425" y="670" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">
+    内存映射段 (Memory Mapping Segment)
+  </text>
+  <text x="425" y="695" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">
+    • 共享库映射 (.so 动态链接库) • mmap() 系统调用分配的内存
+  </text>
+  <text x="425" y="715" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">
+    • 文件映射 (Memory-Mapped Files) • 匿名映射、共享内存段
+  </text>
+  <text x="425" y="735" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ecf0f1">
+    动态分配，通常在堆之上的高地址区域
+  </text>
+  
+  <!-- 堆空间 -->
+  <rect x="100" y="780" width="650" height="130" fill="url(#heapGrad)" stroke="#16a085" stroke-width="3" rx="8"/>
+  <text x="425" y="810" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">
+    堆 (Heap Segment)
+  </text>
+  <text x="425" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">
+    • 动态内存分配 (malloc/calloc/realloc) • 程序运行时按需分配和释放
+  </text>
+  <text x="425" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">
+    • 内存池管理 • 堆管理器 (ptmalloc/tcmalloc/jemalloc)
+  </text>
+  <text x="425" y="875" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ecf0f1">
+    通过 brk/sbrk 系统调用管理边界 (向上增长 ↑)
+  </text>
+  
+  <!-- BSS段 -->
+  <rect x="100" y="930" width="650" height="80" fill="url(#bssGrad)" stroke="#e67e22" stroke-width="3" rx="8"/>
+  <text x="425" y="960" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">
+    BSS段 (Block Started by Symbol)
+  </text>
+  <text x="425" y="985" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">
+    • 未初始化的全局变量和静态变量 • 编译时确定大小
+  </text>
+  
+  <!-- 数据段 -->
+  <rect x="100" y="1030" width="650" height="80" fill="url(#dataGrad)" stroke="#27ae60" stroke-width="3" rx="8"/>
+  <text x="425" y="1060" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">
+    数据段 (Data Segment)
+  </text>
+  <text x="425" y="1085" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">
+    • 已初始化的全局变量和静态变量 • 可读写数据
+  </text>
+  
+  <!-- 代码段 (合并后的完整结构) -->
+  <rect x="100" y="1130" width="650" height="120" fill="url(#textGrad)" stroke="#ad1457" stroke-width="3" rx="8"/>
+  <text x="425" y="1160" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">
+    代码段 (Text Segment) - 完整结构
+  </text>
+  <text x="425" y="1185" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">
+    • 可执行机器指令 • 程序入口点 • 函数代码
+  </text>
+  <text x="425" y="1205" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">
+    • 字符串常量 (.rodata) • 全局偏移表 (GOT) • 过程链接表 (PLT)
+  </text>
+  <text x="425" y="1225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ecf0f1">
+    只读可执行权限，防止程序意外修改指令和常量数据
+  </text>
+</svg>

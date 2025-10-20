@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="800" height="600" fill="white" stroke="#333" stroke-width="1"/>
+  
+  <!-- 标题 -->
+  <text x="400" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#333">
+    线程内部结构与进程内存空间共享关系
+  </text>
+  
+  <!-- 进程边界框 -->
+  <rect x="40" y="60" width="720" height="500" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="50" y="80" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">
+    进程 (Process)
+  </text>
+  
+  <!-- 共享资源区域 -->
+  <rect x="60" y="100" width="300" height="420" fill="#f5f5f5" stroke="#666" stroke-width="1"/>
+  <text x="210" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">
+    共享资源
+  </text>
+  
+  <!-- 共享资源列表 -->
+  <text x="80" y="155" font-family="Arial, sans-serif" font-size="12" fill="#333">• 进程地址空间</text>
+  <text x="100" y="175" font-family="Arial, sans-serif" font-size="11" fill="#666">- 代码段 (Text)</text>
+  <text x="100" y="190" font-family="Arial, sans-serif" font-size="11" fill="#666">- 数据段 (Data)</text>
+  <text x="100" y="205" font-family="Arial, sans-serif" font-size="11" fill="#666">- 堆 (Heap)</text>
+  <text x="100" y="220" font-family="Arial, sans-serif" font-size="11" fill="#666">- 内存映射段</text>
+  
+  <text x="80" y="250" font-family="Arial, sans-serif" font-size="12" fill="#333">• 文件描述符表</text>
+  <text x="80" y="275" font-family="Arial, sans-serif" font-size="12" fill="#333">• 信号处理函数</text>
+  <text x="80" y="300" font-family="Arial, sans-serif" font-size="12" fill="#333">• 进程ID (PID)</text>
+  <text x="80" y="325" font-family="Arial, sans-serif" font-size="12" fill="#333">• 用户ID和组ID</text>
+  <text x="80" y="350" font-family="Arial, sans-serif" font-size="12" fill="#333">• 工作目录</text>
+  <text x="80" y="375" font-family="Arial, sans-serif" font-size="12" fill="#333">• 环境变量</text>
+  
+  <!-- 线程1 -->
+  <rect x="380" y="100" width="160" height="180" fill="none" stroke="#333" stroke-width="1"/>
+  <text x="460" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">
+    线程1
+  </text>
+  <text x="390" y="150" font-family="Arial, sans-serif" font-size="12" fill="#333">私有资源:</text>
+  <text x="390" y="170" font-family="Arial, sans-serif" font-size="11" fill="#666">• 线程ID (TID)</text>
+  <text x="390" y="185" font-family="Arial, sans-serif" font-size="11" fill="#666">• 程序计数器 (PC)</text>
+  <text x="390" y="200" font-family="Arial, sans-serif" font-size="11" fill="#666">• 寄存器集合</text>
+  <text x="390" y="215" font-family="Arial, sans-serif" font-size="11" fill="#666">• 栈空间 (Stack)</text>
+  <text x="390" y="230" font-family="Arial, sans-serif" font-size="11" fill="#666">• 线程局部存储 (TLS)</text>
+  <text x="390" y="245" font-family="Arial, sans-serif" font-size="11" fill="#666">• 错误码 (errno)</text>
+  <text x="390" y="260" font-family="Arial, sans-serif" font-size="11" fill="#666">• 信号掩码</text>
+  
+  <!-- 线程2 -->
+  <rect x="560" y="100" width="160" height="180" fill="none" stroke="#333" stroke-width="1"/>
+  <text x="640" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">
+    线程2
+  </text>
+  <text x="570" y="150" font-family="Arial, sans-serif" font-size="12" fill="#333">私有资源:</text>
+  <text x="570" y="170" font-family="Arial, sans-serif" font-size="11" fill="#666">• 线程ID (TID)</text>
+  <text x="570" y="185" font-family="Arial, sans-serif" font-size="11" fill="#666">• 程序计数器 (PC)</text>
+  <text x="570" y="200" font-family="Arial, sans-serif" font-size="11" fill="#666">• 寄存器集合</text>
+  <text x="570" y="215" font-family="Arial, sans-serif" font-size="11" fill="#666">• 栈空间 (Stack)</text>
+  <text x="570" y="230" font-family="Arial, sans-serif" font-size="11" fill="#666">• 线程局部存储 (TLS)</text>
+  <text x="570" y="245" font-family="Arial, sans-serif" font-size="11" fill="#666">• 错误码 (errno)</text>
+  <text x="570" y="260" font-family="Arial, sans-serif" font-size="11" fill="#666">• 信号掩码</text>
+  
+  <!-- 线程N (虚线表示) -->
+  <rect x="380" y="300" width="340" height="80" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="550" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666">
+    线程N (更多线程...)
+  </text>
+  <text x="550" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">
+    每个线程都有相同的私有资源结构
+  </text>
+  <text x="550" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">
+    但具体内容独立
+  </text>
+  
+  <!-- 共享关系箭头 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+  
+  <line x1="360" y1="180" x2="380" y2="180" stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <line x1="360" y1="200" x2="560" y2="200" stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+  
+  <!-- 说明文字 -->
+  <text x="60" y="450" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#333">
+    关键特性:
+  </text>
+  <text x="60" y="470" font-family="Arial, sans-serif" font-size="11" fill="#666">
+    1. 同一进程内的线程共享大部分资源，通信效率高
+  </text>
+  <text x="60" y="485" font-family="Arial, sans-serif" font-size="11" fill="#666">
+    2. 每个线程维护独立的执行上下文和栈空间
+  </text>
+  <text x="60" y="500" font-family="Arial, sans-serif" font-size="11" fill="#666">
+    3. 线程切换开销小，只需保存/恢复少量寄存器状态
+  </text>
+  <text x="60" y="515" font-family="Arial, sans-serif" font-size="11" fill="#666">
+    4. 多线程并发执行，提高程序响应性和吞吐量
+  </text>
+</svg>
