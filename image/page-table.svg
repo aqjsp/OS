@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="880" height="300" rx="12" fill="#fafafa"/>
+  <rect width="880" height="300" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="440" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">虚拟地址 → 多级页表 → 物理页（x86-64 四级）</text>
+
+  <rect x="20" y="70" width="840" height="50" rx="6" fill="#fff" stroke="#90a4ae"/>
+  <rect x="20" y="70" width="80" height="50" fill="#eceff1"/><text x="60" y="100" text-anchor="middle" font-size="11">符号</text>
+  <rect x="100" y="70" width="140" height="50" fill="#bbdefb"/><text x="170" y="100" text-anchor="middle" font-size="11">PML4 9bit</text>
+  <rect x="240" y="70" width="140" height="50" fill="#c8e6c9"/><text x="310" y="100" text-anchor="middle" font-size="11">PDPT 9bit</text>
+  <rect x="380" y="70" width="140" height="50" fill="#ffe0b2"/><text x="450" y="100" text-anchor="middle" font-size="11">PD 9bit</text>
+  <rect x="520" y="70" width="140" height="50" fill="#f8bbd0"/><text x="590" y="100" text-anchor="middle" font-size="11">PT 9bit</text>
+  <rect x="660" y="70" width="200" height="50" fill="#e1bee7"/><text x="760" y="100" text-anchor="middle" font-size="11">页内偏移 12bit</text>
+  <text x="440" y="160" text-anchor="middle" font-size="13" fill="#37474f">每次访存理论上 4 次内存读页表 + 1 次读数据。TLB 命中则直接出物理地址</text>
+  <text x="440" y="190" text-anchor="middle" font-size="13" fill="#37474f">快表 TLB 是页表的硬件缓存；进程切换要刷 TLB（或用 PCID 避免全刷）</text>
+  <text x="440" y="230" text-anchor="middle" font-size="12" fill="#546e7a">缺页：查页表无效 → 缺页异常 → 内核分配/换入物理页 → 填页表 → 重试指令</text>
+  <text x="440" y="270" text-anchor="middle" font-size="12" fill="#78909c">巨页 Huge Page（2MB/1GB）减少页表层级和 TLB miss，数据库常用</text>
+
+</svg>

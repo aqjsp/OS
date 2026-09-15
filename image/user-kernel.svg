@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 280" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="860" height="280" rx="12" fill="#fafafa"/>
+  <rect width="860" height="280" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="430" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">用户态 ↔ 内核态：系统调用陷入</text>
+
+  <rect x="40" y="58" width="780" height="90" rx="10" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+  <text x="430" y="92" text-anchor="middle" font-size="14" font-weight="bold" fill="#1565c0">用户态 Ring 3：应用、C 库、语言运行时</text>
+  <text x="430" y="118" text-anchor="middle" font-size="12" fill="#0d47a1">read / write / mmap / clone …… 最终都是 syscall</text>
+  <rect x="40" y="168" width="780" height="90" rx="10" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+  <text x="430" y="202" text-anchor="middle" font-size="14" font-weight="bold" fill="#e65100">内核态 Ring 0：调度、页表、驱动、文件系统</text>
+  <text x="430" y="228" text-anchor="middle" font-size="12" fill="#bf360c">syscall 指令陷入 → 查系统调用表 → 执行 → sysret 返回</text>
+  <line x1="430" y1="148" x2="430" y2="168" stroke="#c62828" stroke-width="3"/>
+  <polygon points="430,168 422,156 438,156" fill="#c62828"/>
+  <text x="450" y="162" font-size="11" fill="#c62828">陷入（开销：保存寄存器、切栈、 Spectre 屏障）</text>
+
+</svg>

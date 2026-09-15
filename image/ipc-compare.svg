@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="900" height="320" rx="12" fill="#fafafa"/>
+  <rect width="900" height="320" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="450" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">五种 IPC：管道 → 共享内存</text>
+
+  <rect x="20" y="58" width="160" height="210" rx="8" fill="#e3f2fd" stroke="#1565c0"/>
+  <text x="100" y="88" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565c0">管道 pipe</text>
+  <text x="100" y="120" text-anchor="middle" font-size="11" fill="#0d47a1">半双工</text>
+  <text x="100" y="142" text-anchor="middle" font-size="11" fill="#0d47a1">内核缓冲区</text>
+  <text x="100" y="164" text-anchor="middle" font-size="11" fill="#0d47a1">通常父子</text>
+  <text x="100" y="200" text-anchor="middle" font-size="11" fill="#546e7a">慢、容量小</text>
+  <text x="100" y="230" text-anchor="middle" font-size="11" fill="#546e7a">shell | 就是它</text>
+
+  <rect x="194" y="58" width="160" height="210" rx="8" fill="#e8f5e9" stroke="#2e7d32"/>
+  <text x="274" y="88" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7d32">FIFO</text>
+  <text x="274" y="120" text-anchor="middle" font-size="11" fill="#1b5e20">有名管道</text>
+  <text x="274" y="142" text-anchor="middle" font-size="11" fill="#1b5e20">文件系统路径</text>
+  <text x="274" y="164" text-anchor="middle" font-size="11" fill="#1b5e20">任意进程</text>
+  <text x="274" y="200" text-anchor="middle" font-size="11" fill="#546e7a">仍走内核拷贝</text>
+
+  <rect x="368" y="58" width="160" height="210" rx="8" fill="#fff8e1" stroke="#f9a825"/>
+  <text x="448" y="88" text-anchor="middle" font-size="13" font-weight="bold" fill="#f57f17">消息队列</text>
+  <text x="448" y="120" text-anchor="middle" font-size="11" fill="#e65100">按类型取消息</text>
+  <text x="448" y="142" text-anchor="middle" font-size="11" fill="#e65100">内核链表</text>
+  <text x="448" y="164" text-anchor="middle" font-size="11" fill="#e65100">容量受系统限制</text>
+  <text x="448" y="200" text-anchor="middle" font-size="11" fill="#546e7a">两次拷贝</text>
+
+  <rect x="542" y="58" width="160" height="210" rx="8" fill="#fce4ec" stroke="#c2185b"/>
+  <text x="622" y="88" text-anchor="middle" font-size="13" font-weight="bold" fill="#ad1457">信号量</text>
+  <text x="622" y="120" text-anchor="middle" font-size="11" fill="#880e4f">不传数据</text>
+  <text x="622" y="142" text-anchor="middle" font-size="11" fill="#880e4f">P/V 同步</text>
+  <text x="622" y="164" text-anchor="middle" font-size="11" fill="#880e4f">保护临界区</text>
+  <text x="622" y="200" text-anchor="middle" font-size="11" fill="#546e7a">常配共享内存</text>
+
+  <rect x="716" y="58" width="164" height="210" rx="8" fill="#f3e5f5" stroke="#6a1b9a"/>
+  <text x="798" y="88" text-anchor="middle" font-size="13" font-weight="bold" fill="#6a1b9a">共享内存</text>
+  <text x="798" y="120" text-anchor="middle" font-size="11" fill="#4a148c">映射同一物理页</text>
+  <text x="798" y="142" text-anchor="middle" font-size="11" fill="#4a148c">用户态直接读写</text>
+  <text x="798" y="164" text-anchor="middle" font-size="11" fill="#4a148c">最快</text>
+  <text x="798" y="200" text-anchor="middle" font-size="11" fill="#546e7a">必须自己同步</text>
+
+</svg>

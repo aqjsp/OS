@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="900" height="340" rx="12" fill="#fafafa"/>
+  <rect width="900" height="340" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="450" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">进程 / 线程 / 协程：隔离与调度粒度</text>
+
+  <rect x="30" y="58" width="260" height="250" rx="10" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+  <text x="160" y="86" text-anchor="middle" font-size="14" font-weight="bold" fill="#1565c0">进程</text>
+  <text x="160" y="120" text-anchor="middle" font-size="12" fill="#0d47a1">独立虚拟地址空间</text>
+  <text x="160" y="144" text-anchor="middle" font-size="12" fill="#0d47a1">独立页表 / 文件描述符</text>
+  <text x="160" y="168" text-anchor="middle" font-size="12" fill="#0d47a1">内核调度（抢占）</text>
+  <text x="160" y="204" text-anchor="middle" font-size="12" fill="#1565c0">切换：切 CR3/页表</text>
+  <text x="160" y="228" text-anchor="middle" font-size="12" fill="#1565c0">刷新 TLB，开销最大</text>
+  <text x="160" y="268" text-anchor="middle" font-size="11" fill="#546e7a">隔离最好，IPC 最贵</text>
+
+  <rect x="320" y="58" width="260" height="250" rx="10" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+  <text x="450" y="86" text-anchor="middle" font-size="14" font-weight="bold" fill="#e65100">线程</text>
+  <text x="450" y="120" text-anchor="middle" font-size="12" fill="#bf360c">共享进程地址空间</text>
+  <text x="450" y="144" text-anchor="middle" font-size="12" fill="#bf360c">独立栈 / TLS / 寄存器</text>
+  <text x="450" y="168" text-anchor="middle" font-size="12" fill="#bf360c">内核调度（抢占）</text>
+  <text x="450" y="204" text-anchor="middle" font-size="12" fill="#e65100">切换：不切页表</text>
+  <text x="450" y="228" text-anchor="middle" font-size="12" fill="#e65100">仍要陷入内核</text>
+  <text x="450" y="268" text-anchor="middle" font-size="11" fill="#546e7a">共享内存，要加锁</text>
+
+  <rect x="610" y="58" width="260" height="250" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="740" y="86" text-anchor="middle" font-size="14" font-weight="bold" fill="#2e7d32">协程</text>
+  <text x="740" y="120" text-anchor="middle" font-size="12" fill="#1b5e20">用户态栈 / 寄存器</text>
+  <text x="740" y="144" text-anchor="middle" font-size="12" fill="#1b5e20">协作式 yield / await</text>
+  <text x="740" y="168" text-anchor="middle" font-size="12" fill="#1b5e20">不陷入内核</text>
+  <text x="740" y="204" text-anchor="middle" font-size="12" fill="#2e7d32">切换：几十~几百 ns</text>
+  <text x="740" y="228" text-anchor="middle" font-size="12" fill="#2e7d32">单线程内不能真并行</text>
+  <text x="740" y="268" text-anchor="middle" font-size="11" fill="#546e7a">I/O 密集首选</text>
+
+</svg>
