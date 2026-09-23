@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="900" height="340" rx="12" fill="#fafafa"/>
+  <rect width="900" height="340" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">五种 IO 模型：等数据 + 拷数据，谁阻塞、谁负责</text>
+
+  <text x="60" y="62" font-size="12" font-weight="bold" fill="#37474f">阶段：① 等数据就绪（慢）　② 内核拷到用户空间</text>
+
+  <g font-size="12">
+    <rect x="40" y="76" width="820" height="30" rx="6" fill="#ffebee" stroke="#c62828"/>
+    <text x="55" y="96" fill="#c62828" font-weight="bold">阻塞 IO</text>
+    <text x="230" y="96" fill="#37474f">① 阻塞　② 阻塞　一线程盯一个 fd</text>
+
+    <rect x="40" y="112" width="820" height="30" rx="6" fill="#fff3e0" stroke="#e65100"/>
+    <text x="55" y="132" fill="#e65100" font-weight="bold">非阻塞 IO</text>
+    <text x="230" y="132" fill="#37474f">① 轮询不阻塞（空转烧 CPU）　② 阻塞</text>
+
+    <rect x="40" y="148" width="820" height="30" rx="6" fill="#e3f2fd" stroke="#1565c0"/>
+    <text x="55" y="168" fill="#1565c0" font-weight="bold">多路复用</text>
+    <text x="230" y="168" fill="#37474f">① 阻塞在 select/poll/epoll，一次盯海量 fd　② 阻塞（仍自己 read）</text>
+
+    <rect x="40" y="184" width="820" height="30" rx="6" fill="#f3e5f5" stroke="#6a1b9a"/>
+    <text x="55" y="204" fill="#6a1b9a" font-weight="bold">信号驱动</text>
+    <text x="230" y="204" fill="#37474f">① SIGIO 通知，不阻塞　② 阻塞　（高并发少用）</text>
+
+    <rect x="40" y="220" width="820" height="30" rx="6" fill="#e8f5e9" stroke="#2e7d32"/>
+    <text x="55" y="240" fill="#2e7d32" font-weight="bold">异步 IO</text>
+    <text x="230" y="240" fill="#37474f">① + ② 全交给内核，数据已在 buffer 才通知（io_uring / IOCP）</text>
+  </g>
+
+  <text x="450" y="278" text-anchor="middle" font-size="12" fill="#c62828" font-weight="bold">前四种都是同步（② 拷贝阶段要自己 read），只有异步 IO 是真异步</text>
+  <text x="450" y="302" text-anchor="middle" font-size="12" fill="#455a64">select/poll：每次传整个集合、O(n) 全扫　｜　epoll：一次注册、只返回就绪列表 O(就绪数)</text>
+  <text x="450" y="324" text-anchor="middle" font-size="11" fill="#78909c">LT：有数据没读完就一直通知（默认）　ET：状态变化只通知一次，须非阻塞 + 循环读到 EAGAIN</text>
+</svg>

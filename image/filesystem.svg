@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="900" height="320" rx="12" fill="#fafafa"/>
+  <rect width="900" height="320" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">路径 → inode → 数据块，文件名只是目录里的一条记录</text>
+
+  <rect x="40" y="60" width="200" height="120" rx="8" fill="#e8eaf6" stroke="#283593" stroke-width="2"/>
+  <text x="140" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="#283593">目录项（目录内容）</text>
+  <text x="60" y="112" font-size="12" fill="#1a237e">app.log  → inode 42</text>
+  <text x="60" y="136" font-size="12" fill="#1a237e">app.log.1 → inode 42</text>
+  <text x="60" y="160" font-size="11" fill="#546e7a">（两条 = 硬链接，同一 inode）</text>
+
+  <rect x="300" y="60" width="220" height="140" rx="8" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+  <text x="410" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="#e65100">inode 42（文件真身）</text>
+  <text x="320" y="110" font-size="11" fill="#bf360c">大小 / 权限 / 属主 / 时间戳</text>
+  <text x="320" y="132" font-size="11" fill="#bf360c">链接计数 = 2</text>
+  <text x="320" y="154" font-size="11" fill="#bf360c">直接指针 → 数据块</text>
+  <text x="320" y="176" font-size="11" fill="#bf360c">一/二/三级间接指针（撑大文件）</text>
+  <text x="320" y="194" font-size="11" fill="#c62828">不存文件名！</text>
+
+  <rect x="580" y="70" width="90" height="34" fill="#ffe0b2" stroke="#e65100"/>
+  <rect x="580" y="110" width="90" height="34" fill="#ffe0b2" stroke="#e65100"/>
+  <rect x="580" y="150" width="90" height="34" fill="#ffe0b2" stroke="#e65100"/>
+  <text x="625" y="128" text-anchor="middle" font-size="11" fill="#bf360c">数据块</text>
+  <line x1="520" y1="150" x2="580" y2="127" stroke="#e65100" stroke-width="2" marker-end="url(#f)"/>
+  <line x1="240" y1="110" x2="300" y2="120" stroke="#283593" stroke-width="2" marker-end="url(#f)"/>
+
+  <text x="770" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#00695c">软链接</text>
+  <rect x="700" y="80" width="150" height="60" rx="6" fill="#e0f2f1" stroke="#00695c"/>
+  <text x="775" y="104" text-anchor="middle" font-size="11" fill="#004d40">独立 inode</text>
+  <text x="775" y="124" text-anchor="middle" font-size="11" fill="#004d40">内容 = "/var/log/app.log"</text>
+
+  <defs><marker id="f" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e65100"/></marker></defs>
+  <text x="450" y="230" text-anchor="middle" font-size="12" fill="#455a64">fd → 打开文件表（偏移量）→ inode；fork 共享打开文件表项 → 共享偏移</text>
+  <text x="450" y="256" text-anchor="middle" font-size="12" fill="#455a64">write 先进页缓存（脏页）异步刷盘；要持久化保证得 fsync</text>
+  <text x="450" y="282" text-anchor="middle" font-size="12" fill="#c62828">删文件空间没释放：链接计数或「进程打开计数」不为 0</text>
+  <text x="450" y="306" text-anchor="middle" font-size="11" fill="#78909c">日志文件系统「先写日志再改数据」= 数据库 WAL/redo log 同一思想</text>
+</svg>
